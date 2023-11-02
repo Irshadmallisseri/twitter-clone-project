@@ -1,4 +1,4 @@
 module.exports = {
-    MONGOOSE_URL: "mongodb+srv://databseUser:b8rqHVkqGpWpwCwU@twitter-clone.r3dnq0o.mongodb.net/",
+    MONGOOSE_URL: "mongodb+srv://databseUser:oWwz2zTjl98cruqv@twitter-clone.50iwbgg.mongodb.net/",
     JWT_SECRET: "gfdsjndgjremrrtrt;rfkdoohim"
 }

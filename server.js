@@ -1,5 +1,5 @@
 const express = require('express')
-const PORT = process.env.PORT || 8080
+const PORT = 8080
 const app = express()
 const cors = require('cors')
 require("dotenv").config();
@@ -13,15 +13,15 @@ try {
     mongoose.connection.on('connected', () => {
         console.log('DB Connecetd')
     })
-
+    
     mongoose.connection.on('error', (error) => {
         console.log("Some error occured")
         console.log(error)
     })
 } catch (error) {
-    console.log(error)
+    console.log("Some error occured");
+    console.log(error);
 }
-
 
 app.use(cors())
 app.use(express.json())
