@@ -9,14 +9,19 @@ const { MONGOOSE_URL } = require('./config')
 global.__basedire = __dirname;
 mongoose.connect(MONGOOSE_URL);
 
-mongoose.connection.on('connected', () => {
-    console.log('DB Connecetd')
-})
+try {
+    mongoose.connection.on('connected', () => {
+        console.log('DB Connecetd')
+    })
 
-mongoose.connection.on('error', (error) => {
-    console.log("Some error occured")
+    mongoose.connection.on('error', (error) => {
+        console.log("Some error occured")
+        console.log(error)
+    })
+} catch (error) {
     console.log(error)
-})
+}
+
 
 app.use(cors())
 app.use(express.json())
