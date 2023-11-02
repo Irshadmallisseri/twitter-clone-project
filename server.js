@@ -34,5 +34,5 @@ app.use(require('./routes/user_route'));
 app.use(require('./routes/tweet_route'));
 
 app.listen(PORT, () => {
-    console.log("Server started")
-})
+    console.log("Server started");
+});
