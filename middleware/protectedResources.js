@@ -20,5 +20,9 @@ module.exports = (req, res, next) => {
                 req.user = dbUser
                 next()
             })
+            .catch((error) => {
+                console.log(error)
+                return res.status(401).json({ error: "User not logged in"})
+            })
     })
 }
