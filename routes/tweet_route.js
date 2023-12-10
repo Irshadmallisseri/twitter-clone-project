@@ -10,7 +10,7 @@ router.post('/api/tweet', protectedRoute, upload.single('image'), async (req, re
     const { content } = req.body
     let image = null
     if (!content) {
-        return res.status(400).json({ errror: "One or more mandatory fields are empty" })
+        return res.status(400).json({ error: "One or more mandatory fields are empty" })
     }
     if (req.file) {
         console.log(req.file.filename)
