@@ -5,12 +5,13 @@ const protectedRoute = require('../middleware/protectedResources')
 const UserModel = mongoose.model('UserModel')
 const TweetModel = mongoose.model('TweetModel')
 const upload = require('../routes/file_route')
+const multer = require('multer');
 
 router.post('/api/tweet', protectedRoute, upload.single('image'), async (req, res) => {
     const { content } = req.body
     let image = null
     if (!content) {
-        return res.status(400).json({ error: "One or more mandatory fields are empty" })
+        return res.status(400).json({ error: "Tweet content is required" })
     }
     if (req.file) {
         console.log(req.file.filename)
@@ -132,7 +133,9 @@ router.get('/api/tweet/:id', async (req, res) => {
 
 router.get('/api/tweet', async (req, res) => {
     try {
-        const tweets = await TweetModel.find().populate('likes tweetedBy retweetedBy replies')
+        const tweets = await TweetModel.find()
+        .populate('likes tweetedBy retweetedBy replies')
+        .sort({ createdAt: -1 })
         if (!tweets) {
             return res.status(404).json({ error: "Tweet not founds" })
         }

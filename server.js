@@ -4,6 +4,7 @@ const app = express()
 const cors = require('cors')
 require("dotenv").config();
 const mongoose = require('mongoose')
+const path = require('path')
 const { MONGOOSE_URL } = require('./config')
 
 global.__basedire = __dirname;
@@ -25,6 +26,8 @@ try {
 
 app.use(cors())
 app.use(express.json())
+
+app.use('/images', express.static(path.join(__dirname, 'images')))
 
 require('./models/user_model')
 require('./models/tweet_model')

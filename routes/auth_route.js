@@ -42,11 +42,13 @@ router.post('/api/auth/login', async (req, res) => {
         if (!userInDB) {
             return res.status(401).json({ error: "Invalid credentials" })
         }
-        const passwordCheck = bcryptjs.compare(password, userInDB.password)
+        const passwordCheck = await bcryptjs.compare(password, userInDB.password)
         if (passwordCheck) {
             const jwtToken = jwt.sign({ _id: userInDB._id }, JWT_SECRET);
             const userInfo = { "_id": userInDB._id, "email": userInDB.email, "userName": userInDB.userName, "name": userInDB.name };
             res.status(200).json({ result: { token: jwtToken, user: userInfo } });
+        } else {
+            res.status(401).json({ error: "Invalid credentials" })
         }
     } catch (error) {
         res.status(500).json({ error: "Internal server error" })

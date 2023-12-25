@@ -5,14 +5,15 @@ const storage = multer.diskStorage({
     cb(null, './images/');
   },
   filename: (req, file, cb) => {
-    cb(null, file.originalname);
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, file.originalname + '-' + uniqueSuffix);
   }
 });
 
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: 2048 * 2048 * 1
+    fileSize: 5120 * 5120 * 1
   },
   fileFilter: (req, file, cb) => {
     if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
